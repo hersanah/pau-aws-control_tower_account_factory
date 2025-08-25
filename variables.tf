@@ -6,7 +6,7 @@
 #########################################
 variable "ct_management_account_id" {
   description = "Control Tower Management Account Id"
-  default     = ""
+  default     = "899550196309"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.ct_management_account_id))
@@ -15,6 +15,7 @@ variable "ct_management_account_id" {
 }
 variable "log_archive_account_id" {
   description = "Log Archive Account Id"
+  default     = "935364934696"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.log_archive_account_id))
@@ -23,6 +24,7 @@ variable "log_archive_account_id" {
 }
 variable "audit_account_id" {
   description = "Audit Account Id"
+  default    = "355039310237"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.audit_account_id))
@@ -36,7 +38,7 @@ variable "audit_account_id" {
 
 variable "aft_framework_repo_url" {
   description = "Git repo URL where the AFT framework should be sourced from"
-  default     = "https://github.com/aws-ia/terraform-aws-control_tower_account_factory.git"
+  default     = "https://github.com/hersanah/pau-aws-control_tower_account_factory.git"
   type        = string
   validation {
     condition     = length(var.aft_framework_repo_url) > 0
@@ -46,13 +48,14 @@ variable "aft_framework_repo_url" {
 
 variable "aft_framework_repo_git_ref" {
   description = "Git branch from which the AFT framework should be sourced from"
-  default     = null
+  default     = main
   type        = string
 }
 
 variable "aft_management_account_id" {
   description = "AFT Management Account ID"
   type        = string
+  default     = "864456252790"
   validation {
     condition     = can(regex("^\\d{12}$", var.aft_management_account_id))
     error_message = "Variable var: aft_management_account_id is not valid."
@@ -224,7 +227,7 @@ variable "gitlab_selfmanaged_url" {
 variable "account_request_repo_name" {
   description = "Repository name for the account request files. For non-CodeCommit repos, name should be in the format of Org/Repo"
   type        = string
-  default     = "pau-aft-account-request"
+  default     = "hersanah/pau-aft-account-request"
   validation {
     condition     = length(var.account_request_repo_name) > 0
     error_message = "Variable var: account_request_repo_name cannot be empty."
@@ -244,7 +247,7 @@ variable "account_request_repo_branch" {
 variable "global_customizations_repo_name" {
   description = "Repository name for the global customization files. For non-CodeCommit repos, name should be in the format of Org/Repo"
   type        = string
-  default     = "aft-global-customizations"
+  default     = "hersanah/pau-aft-global-customizations"
   validation {
     condition     = length(var.global_customizations_repo_name) > 0
     error_message = "Variable var: global_customizations_repo_name cannot be empty."
@@ -264,7 +267,7 @@ variable "global_customizations_repo_branch" {
 variable "account_customizations_repo_name" {
   description = "Repository name for the account customizations files. For non-CodeCommit repos, name should be in the format of Org/Repo"
   type        = string
-  default     = "aft-account-customizations"
+  default     = "hersanah/pau-aft-account-customizations"
   validation {
     condition     = length(var.account_customizations_repo_name) > 0
     error_message = "Variable var: account_customizations_repo_name cannot be empty."
@@ -284,7 +287,7 @@ variable "account_customizations_repo_branch" {
 variable "account_provisioning_customizations_repo_name" {
   description = "Repository name for the account provisioning customizations files. For non-CodeCommit repos, name should be in the format of Org/Repo"
   type        = string
-  default     = "aft-account-provisioning-customizations"
+  default     = "hersanah/pau-aft-account-provisioning-customizations"
   validation {
     condition     = length(var.account_provisioning_customizations_repo_name) > 0
     error_message = "Variable var: account_provisioning_customizations_repo_name cannot be empty."
