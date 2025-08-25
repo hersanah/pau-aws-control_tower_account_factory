@@ -1,6 +1,17 @@
 # Copyright Amazon.com, Inc. or its affiliates. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 #
+
+# ✅ Default provider (used when no alias is specified)
+provider "aws" {
+  region = var.ct_home_region
+  # Use your default AWS profile/environment variables for auth
+  default_tags {
+    tags = local.aft_tags
+  }
+}
+
+# Control Tower Management Account
 provider "aws" {
   alias  = "ct_management"
   region = var.ct_home_region
