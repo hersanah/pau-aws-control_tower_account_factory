@@ -282,8 +282,8 @@ module "aft_ssm_parameters" {
   github_enterprise_url                                       = var.github_enterprise_url
   gitlab_selfmanaged_url                                      = var.gitlab_selfmanaged_url
   aft_metrics_reporting                                       = var.aft_metrics_reporting
-  terraform_api_endpoint    = null
-  terraform_token          = null  
-  terraform_org_name       = null
-  terraform_project_name   = null
+  terraform_api_endpoint    = ""
+  terraform_token          = ""  
+  terraform_org_name       = ""
+  terraform_project_name   = ""
 }
