@@ -60,7 +60,12 @@ module "aft_account_request_framework" {
   backup_recovery_point_retention             = var.backup_recovery_point_retention
   aft_customer_vpc_id                         = var.aft_customer_vpc_id
   aft_customer_private_subnets                = var.aft_customer_private_subnets
+
+  # 👇 Required new arguments
+  cloudwatch_log_group_enable_cmk_encryption  = var.cloudwatch_log_group_enable_cmk_encryption
+  sns_topic_enable_cmk_encryption             = var.sns_topic_enable_cmk_encryption
 }
+
 
 module "aft_backend" {
   providers = {
