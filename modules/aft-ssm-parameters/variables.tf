@@ -121,15 +121,6 @@ variable "tf_distribution" {
   type = string
 }
 
-variable "terraform_api_endpoint" {
-  type = string
-}
-
-variable "terraform_token" {
-  type      = string
-  sensitive = true
-}
-
 variable "account_request_repo_name" {
   type = string
 }
@@ -147,11 +138,28 @@ variable "account_provisioning_customizations_repo_branch" {
 }
 
 variable "terraform_org_name" {
-  type = string
+  description = "Terraform Cloud/Enterprise org name (optional)"
+  type        = string
+  default     = null
+}
+
+variable "terraform_token" {
+  description = "Terraform Cloud/Enterprise API token (optional)"
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "terraform_api_endpoint" {
+  description = "Terraform Cloud/Enterprise API endpoint (optional)"
+  type        = string
+  default     = null
 }
 
 variable "terraform_project_name" {
-  type = string
+  description = "Terraform Cloud/Enterprise project name (optional)"
+  type        = string
+  default     = null
 }
 
 variable "aft_execution_role_name" {
