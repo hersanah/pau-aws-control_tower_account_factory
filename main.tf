@@ -121,36 +121,31 @@ module "aft_code_repositories" {
 
 module "aft_customizations" {
   providers = {
-    aws = aws.aft_management
+    aws               = aws.aft_management
+    aws.ct_management = aws.ct_management
   }
-  source                                            = "./modules/aft-customizations"
-  aft_tf_aws_customizations_module_git_ref_ssm_path = local.ssm_paths.aft_tf_aws_customizations_module_git_ref_ssm_path
-  aft_tf_aws_customizations_module_url_ssm_path     = local.ssm_paths.aft_tf_aws_customizations_module_url_ssm_path
-  aft_tf_backend_region_ssm_path                    = local.ssm_paths.aft_tf_backend_region_ssm_path
-  aft_tf_ddb_table_ssm_path                         = local.ssm_paths.aft_tf_ddb_table_ssm_path
-  aft_tf_kms_key_id_ssm_path                        = local.ssm_paths.aft_tf_kms_key_id_ssm_path
-  aft_tf_s3_bucket_ssm_path                         = local.ssm_paths.aft_tf_s3_bucket_ssm_path
-  aft_tf_version_ssm_path                           = local.ssm_paths.aft_tf_version_ssm_path
-  aft_kms_key_id                                    = module.aft_account_request_framework.aft_kms_key_id
-  aft_kms_key_arn                                   = module.aft_account_request_framework.aft_kms_key_arn
-  aft_common_layer_arn                              = module.aft_lambda_layer.layer_version_arn
-  aft_sns_topic_arn                                 = module.aft_account_request_framework.sns_topic_arn
-  aft_failure_sns_topic_arn                         = module.aft_account_request_framework.failure_sns_topic_arn
-  request_metadata_table_name                       = module.aft_account_request_framework.request_metadata_table_name
-  aft_vpc_id                                        = module.aft_account_request_framework.aft_vpc_id
-  aft_vpc_private_subnets                           = module.aft_account_request_framework.aft_vpc_private_subnets
-  aft_vpc_default_sg                                = module.aft_account_request_framework.aft_vpc_default_sg
-  aft_config_backend_bucket_id                      = module.aft_backend.bucket_id
-  aft_config_backend_table_id                       = module.aft_backend.table_id
-  aft_config_backend_kms_key_id                     = module.aft_backend.kms_key_id
-  invoke_account_provisioning_sfn_arn               = module.aft_account_provisioning_framework.state_machine_arn
-  account_request_table_name                        = module.aft_account_request_framework.request_table_name
-  terraform_distribution                            = var.terraform_distribution
-  cloudwatch_log_group_retention                    = var.cloudwatch_log_group_retention
-  maximum_concurrent_customizations                 = var.maximum_concurrent_customizations
-  customizations_archive_path                       = module.packaging.customizations_archive_path
-  customizations_archive_hash                       = module.packaging.customizations_archive_hash
-  global_codebuild_timeout                          = var.global_codebuild_timeout
-  lambda_runtime_python_version                     = local.lambda_runtime_python_version
-  aft_enable_vpc                                    = module.aft_account_request_framework.vpc_deployment
+  source = "./modules/aft-customizations"
+
+  account_request_topic_arn                   = module.aft_account_request_framework.account_request_topic_arn
+  aft_common_layer_arn                        = module.aft_lambda_layer.layer_version_arn
+  customizations_archive_path                 = module.packaging.customizations_archive_path
+  customizations_archive_hash                 = module.packaging.customizations_archive_hash
+  lambda_runtime_python_version               = local.lambda_runtime_python_version
+  terraform_distribution                      = var.terraform_distribution
+  terraform_version                           = var.terraform_version
+  tf_cloud_organization                       = var.tf_cloud_organization
+  tf_cloud_token                              = var.tf_cloud_token
+  tf_cloud_user_token                         = var.tf_cloud_user_token
+  tf_cloud_team_token                         = var.tf_cloud_team_token
+  tf_backend_cloud                            = var.tf_backend_cloud
+  tf_backend_s3                               = var.tf_backend_s3
+  tf_backend_ssm                              = var.tf_backend_ssm
+  tf_backend_dynamodb                         = var.tf_backend_dynamodb
+  tf_backend_custom                           = var.tf_backend_custom
+  backup_recovery_point_retention             = var.backup_recovery_point_retention
+
+  # 👇 Newly required arguments
+  codebuild_compute_type                      = var.codebuild_compute_type
+  cloudwatch_log_group_enable_cmk_encryption  = var.cloudwatch_log_group_enable_cmk_encryption
+  sns_topic_enable_cmk_encryption             = var.sns_topic_enable_cmk_encryption
 }
