@@ -340,6 +340,35 @@ variable "tf_backend_secondary_region" {
 
 
 #########################################
+# Terraform Cloud/Enterprise Variables
+#########################################
+
+variable "terraform_api_endpoint" {
+  description = "Terraform API endpoint for TFC/TFE"
+  type        = string
+  default     = null
+}
+
+variable "terraform_token" {
+  description = "Terraform token for TFC/TFE"
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
+variable "terraform_org_name" {
+  description = "Terraform organization name for TFC/TFE"
+  type        = string
+  default     = null
+}
+
+variable "terraform_project_name" {
+  description = "Terraform project name for TFC/TFE"
+  type        = string
+  default     = null
+}
+
+#########################################
 # AFT VPC Variables
 #########################################
 variable "aft_enable_vpc" {
