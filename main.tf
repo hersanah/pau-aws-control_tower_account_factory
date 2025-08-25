@@ -32,6 +32,8 @@ module "aft_account_provisioning_framework" {
   enroll_support_lambda_function_name              = local.enroll_support_lambda_function_name
   enable_cloudtrail_lambda_function_name           = local.enable_cloudtrail_lambda_function_name
   lambda_runtime_python_version                    = local.lambda_runtime_python_version
+  sns_topic_enable_cmk_encryption         = var.sns_topic_enable_cmk_encryption
+  cloudwatch_log_group_enable_cmk_encryption = var.cloudwatch_log_group_enable_cmk_encryption
 }
 
 module "aft_account_request_framework" {
