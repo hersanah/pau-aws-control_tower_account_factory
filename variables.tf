@@ -6,6 +6,7 @@
 #########################################
 variable "ct_management_account_id" {
   description = "Control Tower Management Account Id"
+  default     = ""
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.ct_management_account_id))
@@ -61,6 +62,7 @@ variable "aft_management_account_id" {
 variable "ct_home_region" {
   description = "The region from which this module will be executed. This MUST be the same region as Control Tower is deployed."
   type        = string
+  default     = "us-east-1"
   validation {
     condition     = can(regex("(us(-gov)?|ap|ca|cn|eu|sa|me|af|il)-(central|(north|south)?(east|west)?)-\\d", var.ct_home_region))
     error_message = "Variable var: region is not valid."
@@ -202,7 +204,7 @@ variable "aft_feature_delete_default_vpcs_enabled" {
 variable "vcs_provider" {
   description = "Customer VCS Provider - valid inputs are codecommit, bitbucket, github, githubenterprise, gitlab, or gitLab self-managed"
   type        = string
-  default     = "codecommit"
+  default     = "github"
   validation {
     condition     = contains(["codecommit", "bitbucket", "github", "githubenterprise", "gitlab", "gitlabselfmanaged"], var.vcs_provider)
     error_message = "Valid values for var: vcs_provider are (codecommit, bitbucket, github, githubenterprise, gitlab, gitlabselfmanaged)."
@@ -222,7 +224,7 @@ variable "gitlab_selfmanaged_url" {
 variable "account_request_repo_name" {
   description = "Repository name for the account request files. For non-CodeCommit repos, name should be in the format of Org/Repo"
   type        = string
-  default     = "aft-account-request"
+  default     = "pau-aft-account-request"
   validation {
     condition     = length(var.account_request_repo_name) > 0
     error_message = "Variable var: account_request_repo_name cannot be empty."
@@ -333,47 +335,6 @@ variable "tf_backend_secondary_region" {
   }
 }
 
-# Non-OSS Variables
-variable "terraform_token" {
-  type        = string
-  description = "Terraform token for Cloud or Enterprise"
-  default     = "null" # Non-sensitive default value #tfsec:ignore:general-secrets-no-plaintext-exposure
-  sensitive   = true
-  validation {
-    condition     = length(var.terraform_token) > 0
-    error_message = "Variable var: terraform_token cannot be empty."
-  }
-}
-
-variable "terraform_org_name" {
-  type        = string
-  description = "Organization name for Terraform Cloud or Enterprise"
-  default     = "null"
-  validation {
-    condition     = length(var.terraform_org_name) > 0
-    error_message = "Variable var: terraform_org_name cannot be empty."
-  }
-}
-
-variable "terraform_project_name" {
-  type        = string
-  description = "Project name for Terraform Cloud or Enterprise - project must exist before deployment"
-  default     = "Default Project"
-  validation {
-    condition     = length(var.terraform_project_name) > 0
-    error_message = "Variable var: terraform_project_name cannot be empty."
-  }
-}
-
-variable "terraform_api_endpoint" {
-  description = "API Endpoint for Terraform. Must be in the format of https://xxx.xxx."
-  type        = string
-  default     = "https://app.terraform.io/api/v2/"
-  validation {
-    condition     = length(var.terraform_api_endpoint) > 0
-    error_message = "Variable var: terraform_api_endpoint cannot be empty."
-  }
-}
 
 #########################################
 # AFT VPC Variables
