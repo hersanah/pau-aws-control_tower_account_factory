@@ -44,6 +44,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "aft_logging_bucket_lifecycle_c
     status = "Enabled"
     id     = "aft_logging_bucket_lifecycle_configuration_rule"
 
+    filter {
+      prefix = "AWSLogs/"
+    }
+
     noncurrent_version_expiration {
       noncurrent_days = var.log_archive_bucket_object_expiration_days
     }
